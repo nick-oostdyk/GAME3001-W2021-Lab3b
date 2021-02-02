@@ -1,6 +1,7 @@
 #include "Tile.h"
 
 #include "Config.h"
+#include "TextureManager.h"
 #include "Util.h"
 
 Tile::Tile()

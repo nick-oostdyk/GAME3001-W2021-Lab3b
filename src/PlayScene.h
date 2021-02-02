@@ -8,6 +8,7 @@
 #include "Obstacle.h"
 #include "SpaceShip.h"
 #include "Target.h"
+#include "Tile.h"
 
 class PlayScene : public Scene
 {
@@ -24,11 +25,16 @@ public:
 
 private:
 	// IMGUI Function
-	void GUI_Function() const;
+	void GUI_Function();
 	std::string m_guiTitle;
 	glm::vec2 m_mousePosition;
 
 	Target* m_pTarget;
+
+	// Pathfinding functions and objects
+	void m_buildGrid();
+	void m_setGridEnabled(bool state);
+	std::vector<Tile*> m_pGrid;
 	
 };
 
