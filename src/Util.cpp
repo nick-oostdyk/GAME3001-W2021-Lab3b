@@ -337,7 +337,7 @@ void Util::DrawRect(glm::vec2 position, int width, int height, glm::vec4 colour)
 	rectangle.w = width;
 	rectangle.h = height;
 
-	const auto renderer = /* TheGame::Instance()->getRenderer()*/ Renderer::Instance()->getRenderer();
+	const auto renderer =  Renderer::Instance()->getRenderer();
 
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 	SDL_RenderDrawRect(renderer, &rectangle);
