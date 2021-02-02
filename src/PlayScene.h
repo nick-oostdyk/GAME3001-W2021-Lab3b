@@ -26,14 +26,9 @@ private:
 	// IMGUI Function
 	void GUI_Function() const;
 	std::string m_guiTitle;
-	
 	glm::vec2 m_mousePosition;
 
-	SpaceShip* m_pSpaceShip;
 	Target* m_pTarget;
-	Obstacle* m_pObstacle;
-	
-	// UI Items
 	
 };
 
