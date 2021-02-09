@@ -56,3 +56,13 @@ void Target::m_checkBounds()
 void Target::m_reset()
 {
 }
+
+glm::vec2 Target::GetGridPos() {
+
+	return m_gridPos;
+}
+
+void Target::SetGridPos(const float _col, const float _row) {
+
+	m_gridPos = glm::vec2(_col, _row);
+}

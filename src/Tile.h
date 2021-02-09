@@ -14,6 +14,7 @@ class Tile : public DisplayObject {
 	Tile *m_neighbors[NUM_NEIGHBOURS];
 
 	float m_cost;
+	glm::vec2 m_gridPos;
 
 	public:
 	// Constructor
@@ -33,6 +34,9 @@ class Tile : public DisplayObject {
 
 	float GetTileCost() const;
 	void SetTileCost(float _cost);
+
+	glm::vec2 GetGridPos();
+	void SetGridPos(const float, const float);
 
 	void AddLabels();
 	void SetLabelsEnabled(bool _state);

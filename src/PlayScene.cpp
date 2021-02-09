@@ -56,8 +56,11 @@ void PlayScene::start() {
 	m_buildGrid();
 
 	m_pTarget = new Target();
-	m_pTarget->getTransform()->position = glm::vec2(400.0f, 300.0f);
+	m_pTarget->getTransform()->position = GetTile(15, 11)->getTransform()->position + offset;
+	m_pTarget->SetGridPos(15, 11);
 	addChild(m_pTarget);
+
+	ComputeTileCosts();
 
 }
 
@@ -70,6 +73,7 @@ void PlayScene::m_buildGrid() {
 
 			Tile *tile = new Tile(); // create empty tile
 			tile->getTransform()->position = glm::vec2(col * tileSize, row * tileSize);
+			tile->SetGridPos(col, row);
 			addChild(tile);
 			tile->AddLabels();
 			tile->setEnabled(false);
@@ -108,7 +112,15 @@ void PlayScene::m_buildGrid() {
 			}
 		}
 	}
+}
 
+void PlayScene::ComputeTileCosts() {
+
+	for (auto tile : m_pGrid) {
+
+		auto distance = Util::distance(m_pTarget->GetGridPos(), tile->GetGridPos());
+		tile->SetTileCost(distance);
+	}
 }
 
 void PlayScene::m_setGridEnabled(bool state) {
@@ -141,8 +153,21 @@ void PlayScene::GUI_Function() {
 		m_setGridEnabled(isGridEnabled);
 	}
 
-
 	ImGui::Separator();
+
+	static int targetPosition[] = { m_pTarget->GetGridPos().x, m_pTarget->GetGridPos().y };
+	if (ImGui::SliderInt2("Target Position", targetPosition, 0, Config::COL_NUM - 1)) {
+
+		if (targetPosition[1] > Config::ROW_NUM - 1)
+			targetPosition[1] = Config::ROW_NUM - 1;
+
+		SDL_RenderClear(Renderer::Instance()->getRenderer());
+		m_pTarget->SetGridPos(targetPosition[0], targetPosition[1]);
+		m_pTarget->getTransform()->position = GetTile(targetPosition[0], targetPosition[1])->getTransform()->position + offset;
+		ComputeTileCosts();
+		SDL_SetRenderDrawColor(Renderer::Instance()->getRenderer(), 255, 255, 255, 255);
+		SDL_RenderPresent(Renderer::Instance()->getRenderer());
+	}
 
 	if (ImGui::Button("Start")) {
 

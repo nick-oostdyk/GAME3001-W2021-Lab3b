@@ -32,6 +32,8 @@ private:
 	Target* m_pTarget;
 
 	// Pathfinding functions and objects
+	glm::vec2 offset = glm::vec2(Config::TILE_SIZE / 2, Config::TILE_SIZE / 2);
+	void ComputeTileCosts();
 	void m_buildGrid();
 	void m_setGridEnabled(bool state);
 	std::vector<Tile*> m_pGrid;
