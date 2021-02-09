@@ -61,45 +61,6 @@ void PlayScene::start() {
 
 }
 
-void PlayScene::GUI_Function() {
-	// Always open with a NewFrame
-	ImGui::NewFrame();
-
-	// See examples by uncommenting the following - also look at imgui_demo.cpp in the IMGUI filter
-	//ImGui::ShowDemoWindow();
-
-	ImGui::Begin("GAME3001 - Lab 3", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoMove);
-
-	static bool isGridEnabled = false;
-	if (ImGui::Checkbox("Grid Enabled", &isGridEnabled)) {
-		// toggle grid on/off
-		m_setGridEnabled(isGridEnabled);
-	}
-
-
-	ImGui::Separator();
-
-	if (ImGui::Button("Start")) {
-
-	}
-
-	ImGui::SameLine();
-
-	if (ImGui::Button("Reset")) {
-
-	}
-
-	ImGui::Separator();
-
-
-	ImGui::End();
-
-	// Don't Remove this
-	ImGui::Render();
-	ImGuiSDL::Render(ImGui::GetDrawData());
-	ImGui::StyleColorsDark();
-}
-
 void PlayScene::m_buildGrid() {
 	auto tileSize = Config::TILE_SIZE;
 
@@ -110,6 +71,7 @@ void PlayScene::m_buildGrid() {
 			Tile *tile = new Tile(); // create empty tile
 			tile->getTransform()->position = glm::vec2(col * tileSize, row * tileSize);
 			addChild(tile);
+			tile->AddLabels();
 			tile->setEnabled(false);
 			m_pGrid.push_back(tile);
 		}
@@ -152,6 +114,7 @@ void PlayScene::m_buildGrid() {
 void PlayScene::m_setGridEnabled(bool state) {
 	for (auto tile : m_pGrid) {
 		tile->setEnabled(state);
+		tile->SetLabelsEnabled(state);
 	}
 
 	if (state == false) {
@@ -161,4 +124,43 @@ void PlayScene::m_setGridEnabled(bool state) {
 
 Tile *PlayScene::GetTile(const int _col, const int _row) {
 	return m_pGrid[_row * Config::COL_NUM + _col];
+}
+
+void PlayScene::GUI_Function() {
+	// Always open with a NewFrame
+	ImGui::NewFrame();
+
+	// See examples by uncommenting the following - also look at imgui_demo.cpp in the IMGUI filter
+	//ImGui::ShowDemoWindow();
+
+	ImGui::Begin("GAME3001 - Lab 3", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoMove);
+
+	static bool isGridEnabled = false;
+	if (ImGui::Checkbox("Grid Enabled", &isGridEnabled)) {
+		// toggle grid on/off
+		m_setGridEnabled(isGridEnabled);
+	}
+
+
+	ImGui::Separator();
+
+	if (ImGui::Button("Start")) {
+
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Reset")) {
+
+	}
+
+	ImGui::Separator();
+
+
+	ImGui::End();
+
+	// Don't Remove this
+	ImGui::Render();
+	ImGuiSDL::Render(ImGui::GetDrawData());
+	ImGui::StyleColorsDark();
 }
