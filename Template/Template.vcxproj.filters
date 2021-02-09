@@ -31,6 +31,9 @@
     <Filter Include="DOCS">
       <UniqueIdentifier>{a44d29c3-2835-4901-a310-0039121b84b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Navigation">
+      <UniqueIdentifier>{6cac1a82-24d1-4d92-875c-9dd5c5aef708}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\StartScene.cpp">
@@ -130,7 +133,7 @@
       <Filter>Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Tile.cpp">
-      <Filter>Game Objects</Filter>
+      <Filter>Navigation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,7 +276,10 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Tile.h">
-      <Filter>Game Objects</Filter>
+      <Filter>Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\NeighbourTile.h">
+      <Filter>Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
