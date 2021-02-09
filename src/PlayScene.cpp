@@ -144,7 +144,6 @@ void PlayScene::m_buildGrid() {
 			} else {
 				tile->SetNeighbourTile(LEFT_TILE, GetTile(col - 1, row));
 			}
-
 		}
 	}
 
